@@ -39,7 +39,7 @@ LABEL maintainer="aptalca"
 COPY --from=buildstage /app/pwndrop/ /app/pwndrop/
 
 # add local files
-COPY /root /
+COPY /docker /
 
 # ports and volumes
 EXPOSE 53 80 443
