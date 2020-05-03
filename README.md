@@ -133,7 +133,8 @@ On first launch, **pwndrop**, by default, will create a new configuration file `
 Here is an example config file with all available config variables with commentary:
 ```
 [pwndrop]
-listen_ip = "190.33.86.22"                  # the external IP of your pwndrop instance (must be set if you want to use the nameserver feature)
+listen_ip = "0.0.0.0"                       # the internal interface IP where pwndrop instance should bind ports to
+response_ip = "127.0.0.1"                   # the external IP, which is replied in DNS responses ((must be set if you want to use the nameserver feature)
 http_port = 80                              # listening port for HTTP and WebDAV
 https_port = 443                            # listening port for HTTPS
 data_dir = "./data"                         # directory path where data storage will reside (relative paths are from executable directory path)
