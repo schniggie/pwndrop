@@ -42,10 +42,10 @@ func (n *Nameserver) handleRequest(w dns.ResponseWriter, r *dns.Msg) {
 	m.SetReply(r)
 
 	qdomain := m.Question[0].Name
-	listen_ip := Cfg.GetListenIP()
-	log.Debug("dns: %s listen_ip: %s", qdomain, listen_ip)
+	response_ip := Cfg.GetResponseIP()
+	log.Debug("dns: %s listen_ip: %s", qdomain, response_ip)
 
-	if Cfg.GetListenIP() == "" {
+	if Cfg.GetResponseIP() == "" {
 		return
 	}
 
@@ -65,10 +65,10 @@ func (n *Nameserver) handleRequest(w dns.ResponseWriter, r *dns.Msg) {
 
 	switch r.Question[0].Qtype {
 	case dns.TypeA:
-		log.Debug("DNS A: " + qdomain + " = " + listen_ip)
+		log.Debug("DNS A: " + qdomain + " = " + response_ip)
 		rr := &dns.A{
 			Hdr: dns.RR_Header{Name: qdomain, Rrtype: dns.TypeA, Class: dns.ClassINET, Ttl: 300},
-			A:   net.ParseIP(listen_ip),
+			A:   net.ParseIP(response_ip),
 		}
 		m.Answer = append(m.Answer, rr)
 	case dns.TypeNS:
