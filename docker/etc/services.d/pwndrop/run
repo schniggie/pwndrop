@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+exec \
+	s6-setuidgid abc \
+		/app/pwndrop/pwndrop \
+			-debug \
+			-config /defaults/pwndrop.ini
