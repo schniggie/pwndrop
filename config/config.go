@@ -13,12 +13,13 @@ import (
 )
 
 const (
-	INI_SERVER         = "pwndrop"
-	INI_VAR_LISTEN_IP  = "listen_ip"
-	INI_VAR_HTTP_PORT  = "http_port"
-	INI_VAR_HTTPS_PORT = "https_port"
-	INI_VAR_DATA_DIR   = "data_dir"
-	INI_VAR_ADMIN_DIR  = "admin_dir"
+	INI_SERVER          = "pwndrop"
+	INI_VAR_LISTEN_IP   = "listen_ip"
+	INI_VAR_RESPONSE_IP = "reponse_ip"
+	INI_VAR_HTTP_PORT   = "http_port"
+	INI_VAR_HTTPS_PORT  = "https_port"
+	INI_VAR_DATA_DIR    = "data_dir"
+	INI_VAR_ADMIN_DIR   = "admin_dir"
 
 	INI_SETUP              = "setup"
 	INI_SETUP_USERNAME     = "username"
@@ -44,11 +45,12 @@ func NewConfig(path string) (*Config, error) {
 	admin_dir := filepath.Join(c.exec_dir, "admin")
 
 	defs := map[string]string{
-		INI_VAR_LISTEN_IP:  "",
-		INI_VAR_HTTP_PORT:  "80",
-		INI_VAR_HTTPS_PORT: "443",
-		INI_VAR_DATA_DIR:   data_dir,
-		INI_VAR_ADMIN_DIR:  admin_dir,
+		INI_VAR_LISTEN_IP:   "",
+		INI_VAR_RESPONSE_IP: "127.0.0.1",
+		INI_VAR_HTTP_PORT:   "80",
+		INI_VAR_HTTPS_PORT:  "443",
+		INI_VAR_DATA_DIR:    data_dir,
+		INI_VAR_ADMIN_DIR:   admin_dir,
 	}
 
 	c.ini, err = ini.Load(path)
@@ -145,6 +147,11 @@ func (c *Config) Save() error {
 
 func (c *Config) GetListenIP() string {
 	s, _ := c.Get(INI_VAR_LISTEN_IP)
+	return s
+}
+
+func (c *Config) GetResponseIP() string {
+	s, _ := c.Get(INI_VAR_RESPONSE_IP)
 	return s
 }
 
